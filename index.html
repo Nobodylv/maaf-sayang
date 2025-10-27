@@ -1,103 +1,205 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Maaf, Ichaa ❤️</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Maafin Aku 🥺💖</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      background: linear-gradient(135deg, #ffe6eb, #ffd6e8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      overflow: hidden;
-      font-family: 'Poppins', sans-serif;
+    :root{
+      --bg1:#fff1f6;
+      --bg2:#ffeaf2;
+      --accent:#ff4d79;
+      --card:#fff;
+      --muted:#666;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--bg1),var(--bg2));
+      font-family:"Poppins",system-ui,-apple-system,Segoe UI,Roboto,Arial;
+      padding:24px;
     }
 
-    h1 {
-      font-size: 2.5em;
-      color: #ff3366;
-      margin-bottom: 10px;
-      animation: fadeIn 2s ease-in-out;
+    /* main card */
+    .card{
+      width:360px;
+      max-width:94vw;
+      background:var(--card);
+      padding:28px;
+      border-radius:20px;
+      box-shadow:0 18px 40px rgba(0,0,0,0.12);
+      text-align:center;
     }
+    h2{color:var(--accent);margin:0 0 8px 0}
+    p{color:var(--muted);margin:0 0 18px 0}
 
-    p {
-      font-size: 1.2em;
-      color: #333;
-      text-align: center;
-      width: 80%;
-      max-width: 600px;
-      line-height: 1.6;
-      animation: fadeIn 3s ease-in-out;
+    .btn{
+      display:inline-block;
+      padding:10px 20px;
+      border-radius:12px;
+      border:none;
+      font-weight:600;
+      cursor:pointer;
+      margin:8px;
+      transition:transform .12s ease, background .12s ease;
     }
+    .btn:active{transform:translateY(2px)}
+    .btn-yes{background:linear-gradient(180deg,#ff7aa9,#ff4d79);color:#fff;box-shadow:0 8px 18px rgba(255,77,121,0.18)}
+    .btn-no{background:#e6e6e6;color:#444;position:relative}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    /* modal surat */
+    .overlay{
+      position:fixed;inset:0;background:rgba(0,0,0,0.55);display:flex;align-items:center;justify-content:center;
+      opacity:0;visibility:hidden;transition:opacity .25s ease, visibility .25s;
     }
-
-    .heart {
-      position: absolute;
-      top: -10px;
-      color: rgba(255, 102, 153, 0.8);
-      font-size: 20px;
-      animation: fall linear infinite;
+    .overlay.show{opacity:1;visibility:visible}
+    .modal{
+      width:90%;max-width:720px;background:var(--card);border-radius:16px;padding:20px 22px;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.2);
     }
-
-    @keyframes fall {
-      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    .close{
+      position:absolute;right:12px;top:12px;background:#fff;border:0;padding:6px 8px;border-radius:9px;cursor:pointer;
     }
-
-    #unmuteButton {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #ff3366;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    .modal-header{display:flex;gap:12px;align-items:center}
+    .bear{
+      width:72px;height:72px;border-radius:14px;background:linear-gradient(180deg,#fff,#ffeef6);display:flex;align-items:center;justify-content:center;font-size:42px;box-shadow:0 10px 30px rgba(0,0,0,0.08)
     }
+    .modal h3{margin:0;color:var(--accent)}
+    .letter{margin-top:12px;background:linear-gradient(180deg,#fff,#fffafc);padding:16px;border-radius:12px;border:1px solid #fde8ef;min-height:120px;color:#222;line-height:1.6}
 
-    #unmuteButton:hover {
-      background: #ff668a;
+    /* music + controls area */
+    .music-controls{display:flex;gap:10px;align-items:center;margin-top:12px}
+    .unmute-btn{background:var(--accent);color:#fff;border:0;padding:10px;border-radius:12px;cursor:pointer;font-weight:700}
+    .note{font-size:13px;color:var(--muted);margin-left:6px}
+
+    /* playful no-button behavior (moves away) */
+    .no-moving{position:absolute}
+
+    @media (max-width:420px){
+      .bear{width:60px;height:60px;font-size:36px}
     }
   </style>
 </head>
 <body>
-  <h1>Maaf, Ichaa ❤️</h1>
-  <p>maaf ya karna tadi siang kita miscom , ampe aku salahin kamu nya padahal aku yang salah, maafin aku ya sayang ku cintaku istrikuu kesayangan ku</p>
 
-  <iframe id="music" width="0" height="0" src="https://www.youtube.com/embed/rtOvBOTyX00?autoplay=1&mute=1&loop=1&playlist=rtOvBOTyX00" allow="autoplay"></iframe>
+  <div class="card" id="card">
+    <h2>Aku minta maaf 🥺💖</h2>
+    <p>Aku beneran gak bermaksud bikin kamu kesel.<br>Maafin aku, ya?</p>
 
-  <button id="unmuteButton" title="Nyalakan musik">🔈</button>
+    <button class="btn btn-yes" id="maafinBtn">Maafin 💞</button>
+    <button class="btn btn-no" id="enggakBtn">Enggak 😒</button>
+  </div>
+
+  <!-- Modal / Surat -->
+  <div class="overlay" id="overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="close" id="closeModal" title="Tutup">✕</button>
+
+      <div class="modal-header">
+        <div class="bear" aria-hidden="true">🐻</div>
+        <div>
+          <h3 id="modalTitle">Surat untuk Ichaa</h3>
+          <div style="font-size:13px;color:#666;margin-top:4px">Klik 🔈 untuk menyalakan musik</div>
+        </div>
+      </div>
+
+      <div class="letter" id="letter">
+        <!-- isi surat (tetap ditampilkan saat modal dibuka) -->
+        <strong>dede ku sayang,</strong><br><br>
+        maafin aku ya... kita tadi salah paham karena aku salahin kamu padahal aku yang salah. maafin aku yang sayangku, cintaku.  
+      </div>
+
+      <div style="display:flex;align-items:center;justify-content:flex-start;margin-top:14px">
+        <!-- Hidden iframe YouTube (autoplay=1&mute=1) - will play because user clicked Maafin -->
+        <iframe id="ytPlayer" width="0" height="0"
+          src=""
+          style="border:0" allow="autoplay"></iframe>
+
+        <button class="unmute-btn" id="unmuteBtn" title="Nyalakan suara">🔈 Nyalakan Musik</button>
+        <div class="note">Preview: A Thousand Years (muted saat mulai)</div>
+      </div>
+
+    </div>
+  </div>
 
   <script>
-    const numHearts = 25;
-    for (let i = 0; i < numHearts; i++) {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.textContent = '❤';
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = 4 + Math.random() * 6 + 's';
-      heart.style.fontSize = 15 + Math.random() * 25 + 'px';
-      document.body.appendChild(heart);
+    // elements
+    const maafinBtn = document.getElementById('maafinBtn');
+    const enggakBtn = document.getElementById('enggakBtn');
+    const overlay = document.getElementById('overlay');
+    const closeModal = document.getElementById('closeModal');
+    const ytPlayer = document.getElementById('ytPlayer');
+    const unmuteBtn = document.getElementById('unmuteBtn');
+
+    // YouTube video id for "A Thousand Years" (official)
+    const ytId = 'rtOvBOTyX00';
+
+    // helper: set iframe src with mute param
+    function setYT(mute){
+      // include playlist param to allow loop; autoplay=1; mute param 1 or 0
+      ytPlayer.src = `https://www.youtube.com/embed/${ytId}?autoplay=1&mute=${mute?1:0}&loop=1&playlist=${ytId}&controls=0&rel=0`;
     }
 
-    // tombol untuk unmute
-    document.getElementById('unmuteButton').addEventListener('click', () => {
-      const iframe = document.getElementById('music');
-      iframe.src = 'https://www.youtube.com/embed/rtOvBOTyX00?autoplay=1&mute=0&loop=1&playlist=rtOvBOTyX00';
-      alert('🎶 Musik diaktifkan!');
+    // tombol Maafin -> buka modal & start youtube (muted)
+    maafinBtn.addEventListener('click', () => {
+      // open modal
+      overlay.classList.add('show');
+      overlay.setAttribute('aria-hidden','false');
+
+      // set yt to autoplay muted (user clicked, so autoplay allowed)
+      setYT(true);
+    });
+
+    // tombol tutup
+    closeModal.addEventListener('click', () => {
+      overlay.classList.remove('show');
+      overlay.setAttribute('aria-hidden','true');
+
+      // stop video by clearing src
+      ytPlayer.src = '';
+    });
+
+    // tombol unmute: reload iframe with mute=0
+    unmuteBtn.addEventListener('click', () => {
+      // set with sound on
+      setYT(false);
+
+      // small feedback
+      unmuteBtn.textContent = '🔊 Suara Aktif';
+      setTimeout(()=> unmuteBtn.textContent = '🔊 Suara Aktif', 1500);
+    });
+
+    // tombol Enggak akan bergerak saat kursor mendekat:
+    enggakBtn.addEventListener('mouseenter', moveAway);
+    enggakBtn.addEventListener('click', moveAway); // juga pindah kalau kebetulan klik
+    function moveAway(){
+      // compute new position within viewport, but keep within visible area
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      const btn = enggakBtn;
+      const bw = btn.offsetWidth;
+      const bh = btn.offsetHeight;
+
+      const x = Math.random() * (w - bw - 40) + 20;
+      const y = Math.random() * (h - bh - 40) + 20;
+
+      // set absolute position relative to viewport
+      btn.style.position = 'fixed';
+      btn.style.left = x + 'px';
+      btn.style.top = y + 'px';
+    }
+
+    // optional: close modal when clicking outside modal content
+    overlay.addEventListener('click', (e) => {
+      if(e.target === overlay){
+        closeModal.click();
+      }
     });
   </script>
+
 </body>
 </html>
