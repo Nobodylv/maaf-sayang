@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Maaf, Ichaa ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffe6eb, #ffd6e8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff3366;
+      margin-bottom: 10px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #333;
+      text-align: center;
+      width: 80%;
+      max-width: 600px;
+      line-height: 1.6;
+      animation: fadeIn 3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .heart {
+      position: absolute;
+      top: -10px;
+      color: rgba(255, 102, 153, 0.8);
+      font-size: 20px;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    #unmuteButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff3366;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 20px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    #unmuteButton:hover {
+      background: #ff668a;
+    }
+  </style>
+</head>
+<body>
+  <h1>Maaf, Ichaa ❤️</h1>
+  <p>maaf ya karna tadi siang kita miscom , ampe aku salahin kamu nya padahal aku yang salah, maafin aku ya sayang ku cintaku istrikuu kesayangan ku</p>
+
+  <iframe id="music" width="0" height="0" src="https://www.youtube.com/embed/rtOvBOTyX00?autoplay=1&mute=1&loop=1&playlist=rtOvBOTyX00" allow="autoplay"></iframe>
+
+  <button id="unmuteButton" title="Nyalakan musik">🔈</button>
+
+  <script>
+    const numHearts = 25;
+    for (let i = 0; i < numHearts; i++) {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.textContent = '❤';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = 4 + Math.random() * 6 + 's';
+      heart.style.fontSize = 15 + Math.random() * 25 + 'px';
+      document.body.appendChild(heart);
+    }
+
+    // tombol untuk unmute
+    document.getElementById('unmuteButton').addEventListener('click', () => {
+      const iframe = document.getElementById('music');
+      iframe.src = 'https://www.youtube.com/embed/rtOvBOTyX00?autoplay=1&mute=0&loop=1&playlist=rtOvBOTyX00';
+      alert('🎶 Musik diaktifkan!');
+    });
+  </script>
+</body>
+</html>
